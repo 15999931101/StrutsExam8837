@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+tb,tr,td{
+    border: 2px solid silver;
+}
+@CHARSET "UTF-8";
+body{
+	margin: 0px;
+	padding: 0px;
+}
+.header{
+	margin: 0px;
+	padding: 0px;
+	background: lightblue;
+	height: 35px;	
+	width: 100%;
+}
+.content{
+	margin-top:30px;
+	
+	padding:auto auto;
+	width: 100%;
+	height: 650px;
+	
+	
+}
+.footer{
+	background: aqua;
+	height: 35px;
+
+	width: 100%;
+	
+}
+.container{
+	margin:0px auto;	
+	border: 2px;
+	width: 75%;
+}

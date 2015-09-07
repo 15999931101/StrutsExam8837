@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<!-- 配置根元素 -->
+<struts>
+
+	<!-- 配置web默认编码集，相当于 HttpServletRequest.setChartacterEncoding用法 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<!-- 默认我们Struts2的请求后缀是.action,也就是说我们不配置该元素，action/do都可以 -->
+	<constant name="struts.action.extension" value="action,do"></constant>
+	<!-- 设置浏览器是否缓存静态内容，默认值为true，在我们开发阶段建议关闭，防止修改后测试不到 -->
+	<constant name="struts.serve.static.browserCache" value="false"></constant>
+	<!-- 当struts 配置文件修改后，系统是否自动重新加载该文件，默认为false -->
+	<constant name="struts.configuration.xml.reload" value="true"></constant>
+	<!-- 开发模式下使用，这样可以打印出更加详细的错误信息 -->
+	<constant name="struts.devMode" value="true"></constant>
+	<!-- 默认视图主题 -->
+	<constant name="struts.ui.theme" value="simple"></constant>
+
+	<package name="test" extends="struts-default">
+		<!--  <interceptors>
+			<interceptor name="checkLogin"
+				class="com.hand.interceptor.CheckLoginInterceptor"></interceptor>
+			<interceptor-stack name="defaultInterceptorss">
+				<interceptor-ref name="checkLogin"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors> 
+
+		<default-interceptor-ref name="defaultInterceptorss"></default-interceptor-ref> -->
+
+		<global-results>
+			<result name="loginfail">/login.jsp</result>
+		</global-results>
+
+		<action name="loginAction" class="com.hand.action.LoginAction">
+			<result name="success">/index.jsp</result>
+			<result name="loginfail">/login.jsp</result>
+		</action>
+		<action name="updateAction" class="com.hand.action.UpdateAction">
+			<result name="customerSuccess">/index.jsp</result>
+			<result name="customerFail">/index.jsp</result>
+		</action>
+		<action name="deleteAction" class="com.hand.action.DeleteAction">
+			<result name="deletesuccess">/index.jsp</result>
+			<result name="deletefail">/index.jsp</result>
+		</action>
+		<action name="addAction" class="com.hand.action.AddAction">
+			<result name="addsuccess">/index.jsp</result>
+			<result name="addfail">/index.jsp</result>
+		</action>
+		
+		<action name="logoutAction" class="com.hand.action.LogoutAction">
+			<result name="logout">/login.jsp</result>
+		
+		</action>
+	</package>
+
+
+</struts>

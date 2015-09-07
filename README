@@ -1,0 +1,4 @@
+mvn clean;
+mvn compile;
+mvn tomcat:run;
+http:localhost:8080/login.jsp运行即可
