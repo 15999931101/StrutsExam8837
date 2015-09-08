@@ -10,79 +10,50 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class PermissionFilter
  */
 public class PermissionFilter implements Filter {
 
+    /**
+     * Default constructor. 
+     */
+    public PermissionFilter() {
+    }
+    /**
+     * @see Filter#init(FilterConfig)
+     */
+    public void init(FilterConfig fConfig) throws ServletException {
+    }
+
 	/**
-	 * Default constructor.
+	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public PermissionFilter() {
-		// TODO Auto-generated constructor stub
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse resp = (HttpServletResponse) response;
+		String path = req.getServletPath();
+		Object user = req.getSession().getAttribute("user");
+		if(user != null){
+			chain.doFilter(request, response);
+		}else{
+			if(!path.equals("/login.jsp")){//未登录，直接访问其它页面
+				resp.sendRedirect("Login.action");
+			}else{//用户直接访问登录页面
+				RequestDispatcher rd = req.getRequestDispatcher("/login.jsp");
+				request.removeAttribute("msg");
+				rd.forward(req, resp);
+			}
+			
+		}
+		
 	}
+
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
-
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-
-		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-
-		String servletPath = httpServletRequest.getServletPath();
-
-		HttpSession session = httpServletRequest.getSession();
-
-		String flag = (String) session.getAttribute("flag");
-		if (flag != null) {
-			System.out.println("INFO-->" + flag);
-		} else {
-			System.out.println("INFO-->flag==null");
-		}
-		System.out.println("INFO-->" + servletPath);
-
-		if (servletPath != null && servletPath.equals("/login.jsp") || servletPath.equals("/LoginServlet")) {
-			System.out.println("INFO-->进入登录页面或提交登录信息");
-			chain.doFilter(request, response);
-		} else {
-			if (flag != null && flag.equals("success")) {
-				System.out.println("INFO-->已登录成功，进入其他页面");
-				chain.doFilter(request, response);
-			} else if (flag != null && flag.equals("error")) {
-				System.out.println("INFO-->登录失败，重新返回登录页面");
-				httpServletRequest.setAttribute("return_uri", servletPath);
-				RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher("/login.jsp");
-				requestDispatcher.forward(httpServletRequest, httpServletResponse);
-			} else {
-				System.out.println("INFO-->尚未登录，返回登录页面");
-				httpServletRequest.setAttribute("return_uri", servletPath);
-				RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher("/login.jsp");
-				requestDispatcher.forward(httpServletRequest, httpServletResponse);
-			}
-		}
-
-		// pass the request along the filter chain
-
-	}
-
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
-	}
-
 }

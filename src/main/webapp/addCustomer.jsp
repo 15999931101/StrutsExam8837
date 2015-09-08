@@ -1,146 +1,193 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.hand.dao.impl.*"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link href="bootstrap.min.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="bootstrap.min.js"></script>
-<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="my.css"></script>
-<link href="bootstrap.min.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="bootstrap.min.js"></script>
-<link href="style1.css" type="text/css" rel="stylesheet">
-
+<title>主页面</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/index_style.css" />
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+function check() {
+					//document.forms.form1.username.value取得form1中Username的值 并判断是否为空
+					if (document.forms.addCusForm.input_one.value == "") {
+						//如果 为""则弹出提示
+						alert("请输入first_name！");
+						//将输入焦点定位到没有输入的地方
+						document.forms.addCusForm.input_one.focus();
+						//返回错误
+						return false;
+					}else if (document.forms.addCusForm.input_two.value == "") {
+						//如果 为""则弹出提示
+						alert("请输入last_name！");
+						//将输入焦点定位到没有输入的地方
+						document.forms.addCusForm.input_two.focus();
+						//返回错误
+						return false;
+					}else if (document.forms.addCusForm.input_three.value == "") {
+						//如果 为""则弹出提示
+						alert("请输入email！");
+						//将输入焦点定位到没有输入的地方
+						document.forms.addCusForm.input_three.focus();
+						//返回错误
+						return false;
+					}else if (document.forms.addCusForm.input_four.value == "") {
+						//如果 为""则弹出提示
+						alert("请输入address！");
+						//将输入焦点定位到没有输入的地方
+						document.forms.addCusForm.input_four.focus();
+						//返回错误
+						return false;
+					}
+				}
+	$(document).ready(
+			function() {
+				var arr;
+				function ajaxForData() {
+					$.ajax({
+						method : "Post",
+						url : "/StrutsExam8837/getAddress.action",
+						async : true,
+						data : "",
+						dataType : 'json',
+						success : function(data) {
+							//alert("Data Getted: " + data);
+							arr = data;
+							var op = '';
+			                for(var index=0;index<arr.length;index++){
+			                    op = "<option>"+ arr[index] + "</option>";
+			                    $("#input_four").append(op);
+			                }
+						},
+						/* timeout : 800, */
+						error : function(info, status, error) {
+							alert('Error: ' + info.status + ' - ' + error);
+						}
+					});
+				}
+				;
+				<%
+				if(session.getAttribute("user")!=null){
+					%>
+					ajaxForData();
+				
+					<%
+				}
+				%>
+				
+				 
+				
+			});
+</script>
 </head>
 <body>
-	<%
-		Connection conn = null;
-		conn = GetConnetion.getConnection(); 
-		/* Connection conn=ConnectionFactory.getInstance().makeConnection(); */
-		String sql = "select address from address";
-		PreparedStatement ps1 = conn.prepareCall(sql);
-		ResultSet rs = ps1.executeQuery(sql);//执行sql语句
-		ArrayList list = new ArrayList();
-		while (rs.next()) {
-			int i = 0;
-			list.add(i++, rs.getString(1));
-		}
-	%>
-
-<div class="container" style="">
-		<div  class="header" style="padding:0px;font-style: normal ;color:#473299;height: 60px;position:relative;">
-			<div style="position: absolute;left:10px;"><h1 >8837 林立鹏</h1></div>
-			<div style="position: absolute;right:10px;">
-			<%
-		String flag = "";
-		Object obj = session.getAttribute("flag");
-		if (obj != null) {
-			flag = obj.toString();
-		}
-		if (flag.equals("login_success")) {
-	%>
-	<a href="<%=request.getContextPath()%>/logoutAction">退出</a><br/><br/>
-
-
-
-	<%
-		} else {
-	%>
-	<a href="<%=request.getContextPath()%>/login.jsp">登录</a><br/><!--  --><br/>
-	<%
-		}
-	%>
-			</div> 
-		</div>
-		
-		<div class="content" >
-			<div class="col-sm-2" id="left1">
-				<div class="btn-group" >
-					<button type="button" class="btn btn-default  btn-sm ">Customer管理</button>
-					<button type="button" class="btn btn-default  btn-sm dropdown-toggle"
-						data-toggle="dropdown">
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="index.jsp">customer管理</a></li>
-					</ul>
+	<div class="body_div">
+		<!-- 页面导航栏区域 -->
+		<div class="body_title">
+			<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<h3>8837 林立鹏</h3>
 				</div>
-				<br>
+				<div class="collapse navbar-collapse">
+					<div class="user_style dropdown">
+						<a href="#" class="dropdown-toggle user_a_style"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false"> <%=session.getAttribute("user")%> <span
+							class="caret"></span></a>
+						<ul class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="uerdm">
+							<li role="presentation"><a
+								href="<%=request.getContextPath()%>/Exit.action"
+								onclick="return confirm('确定要退出系统吗？')">退出系统</a></li>
+						</ul>
 
-				<div class="btn-group" id="left2">
-					<button type="button" class="btn btn-default btn-sm ">F i l m管理</button>
-					<button type="button" class="btn btn-default btn-sm dropdown-toggle"
-						data-toggle="dropdown">
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="index.jsp">Film</a></li>
-					</ul>
+					</div>
+					<div class="img_style">
+						<span><img src="<%=request.getContextPath()%>/image/admin.jpg" /></span>
+					</div>
 				</div>
 			</div>
-
-			<div style=" border-left: 1px solid gray; "  class="col-sm-10" id="right">
-			<form action="<%=request.getContextPath()%>/addAction.action" method="post">
-			<table border="1" cellpadding="5" cellspacing="0" bgcolor="silver"
-				align="center">
-				<tr>
-					<td colspan="2" align="center" bgcolor="#E7899">添加customer记录</td>
-				</tr>
-				<tr>
-					<td>First_name</td>
-					<td><input type="text" name="first_name"></td>
-				</tr>
-				<tr>
-					<td>Last_naem</td>
-					<td><input type="text" name="last_name"></td>
-				</tr>
-				<tr>
-					<td>Email</td>
-					<td><input type="text" name="email"></td>
-				</tr>
-				<tr>
-					<td>Address</td>
-					<td><select id="select1" name="select1">
-							<option value="请选择" selected="selected">请选择</option>
-							<%
-								for (int i = 0; i < list.size(); i++) {
-							%>
-							<option value="<%=list.get(i).toString()%>">
-								<%=list.get(i).toString()%>
-							</option>
-							<%
-								}
-							%>
-					</select></td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center"><input type="submit" name="添加">
-						<input type="reset" name="重置"></td>
-				</tr>
-
-			</table>
-		
-			</div>
-
+			</nav>
 		</div>
-	</div>
-	
-
-
-
-
-
+		<!--主要内容-->
+		<div class="body_content">
+			<div class="row table-bordered">
+				<!--左侧菜单栏-->
+				<div class="col-lg-2">
+					<div class="row">
+						<div class="list-group">
+							<a href="#" class="list-group-item active"> 应用设置 <span
+								class="glyphicon glyphicon-chevron-right pull-right"></span>
+							</a> <a href="#" class="list-group-item"> 管理设置 <span
+								class="glyphicon glyphicon-chevron-right pull-right"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!--右侧主界面-->
+				<div class="col-lg-10 table-bordered">
+					<!--创建客户-->
+					<div class="row">
+						<div class="col-lg-9">
+							<h3>
+								<strong>创建客户</strong>
+							</h3>
+						</div>
+					</div>
+					<hr />
+					<div class="row">
+						<div class="col-lg-9">
+							<h4>基本信息</h4>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-9">
+							<form class="form-horizontal col-lg-9 table-bordered" id="addCusForm"
+								name="addCusForm.action" method="POST" action="addAction.action">
+								<div class="form-group form-group-md">
+									<label class="col-md-2 control-label" for="input_one">FirstName<span
+										style="color: red">*</span></label>
+									<div class="col-md-10">
+										<input class="form-control" type="text" id="input_one"
+											name="first_name" placeholder="FirstName">
+									</div>
+								</div>
+								<div class="form-group form-group-md">
+									<label class="col-md-2 control-label" for="input_two">LastName<span
+										style="color: red">*</span></label>
+									<div class="col-md-10">
+										<input class="form-control" type="text" id="input_two"
+											name="last_name" placeholder="LastName">
+									</div>
+								</div>
+								<div class="form-group form-group-md">
+									<label class="col-md-2 control-label" for="input_three">Email</label>
+									<div class="col-md-10">
+										<input class="form-control" type="email" id="input_three"
+											name="email" placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group form-group-md">
+									<label class="col-md-2 control-label" for="input_four">Address<span
+										style="color: red">*</span></label>
+									<div class="col-md-10">
+										<select class="form-control input-lg" id="input_four"
+											name="address">
+										</select>
+									</div>
+								</div>
+								<div class="form-group form-group-md">
+									<div class="col-md-10 text-center">
+										<button class="btn btn-info" onclick="check()">提交</button>
+										<button type="reset" class="btn">取消</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 </body>
 </html>

@@ -10,12 +10,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login page</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-
+<link rel="stylesheet" type="text/css" href="css/login_style.css"/>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <style>
-        body{
-            background-image: url("/image/peng.jpg");
-        }
+       
         form{
         	margin-top: 10px;
         }
@@ -23,11 +21,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
 	function check(form) {
 		//document.forms.form1.username.value取得form1中Username的值 并判断是否为空
-		if (document.forms.LoginForm.uname.value == "") {
+		if (document.forms.LoginForm.username.value == "") {
 			//如果 为""则弹出提示
 			alert("请输入用户名！");
 			//将输入焦点定位到没有输入的地方
-			document.forms.LoginForm.uname.focus();
+			document.forms.LoginForm.username.focus();
 			//返回错误
 			return false;
 		}else if (document.forms.LoginForm.password.value == "") {
@@ -41,32 +39,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 </script>
 </head>
-<body>
+<body  >
 <div class="container pull-left">
     <a href="#"><h1>8837 林立鹏</h1></a>
 </div>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2 table-bordered" style="margin-top: 20%;background-color: #f8f8f8;">
-            <div class="row table-bordered"><h3 class="col-md-offset-1">电影管理系统</h3></div>
+            <div class="row table-bordered"><h3 class="col-md-offset-1">电影租赁管理系统</h3></div>
             <form class="form-horizontal" action="<%=path%>/loginAction.action" method="post" name="LoginForm">
                 <% if(request.getAttribute("return_uri") != null) { %>
 			<input type="hidden" name="return_uri" value="<%= request.getAttribute("return_uri") %>">
 		<% } %>
                 <div class="form-group has-feedback">
-                    <label class="col-sm-2 control-label" for="account">账号:</label>
-                    <div class="col-sm-3">
+                    <label class="col-sm-3 control-label" for="account">账号:</label>
+                    <div class="col-sm-5">
                         <input name="username" class="form-control" type="text" id="account" placeholder="账号">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="password">密码:</label>
-                    <div class="col-sm-3">
+                    <label class="col-sm-3 control-label" for="password">密码:</label>
+                    <div class="col-sm-5">
                         <input name="password" class="form-control" type="password" id="password" placeholder="密码">
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-2 col-sm-offset-2">
+                    <div class="col-sm-3 col-sm-offset-3">
                         <input type="submit" id="submit" value="提交">
                         <input type="reset" id="reset" value="重置">
                     </div>

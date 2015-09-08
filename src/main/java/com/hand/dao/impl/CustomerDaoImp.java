@@ -4,11 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.hand.dao.CustomerDao;
-import com.hand.dao.FilmDao;
 import com.hand.entity.Customer;
-import com.hand.entity.Film;
+
 
 
 
@@ -23,10 +21,8 @@ public class CustomerDaoImp implements CustomerDao {
 		return ps.executeQuery();
 		
 	}
-
-	public void save(Connection conn, Customer cst) throws SQLException {
-		
-		
+	
+	public void save(Connection conn, Customer cst) throws SQLException {	
 		
 		String insertSql = "insert into customer(store_id,first_name,last_name,"
 				+ "email,address_id,active,create_date,last_update) values(?,?,?,?,?,?,?,?)";
@@ -50,14 +46,10 @@ public class CustomerDaoImp implements CustomerDao {
 	}
 
 	public boolean update(Connection conn, Customer cst) throws SQLException {
-//		System.out.println(film.getLanguage());
-//		String rental_duration="6";
-//		String rental_rate="1.00";
-//		String replacement_cost="20.00";
-//		String last_update="2015-8-16 ";
-		System.out.println(cst.getStore_id()+"\t"+cst.getFirst_name()+"\t"+cst.getCustomer_id()+cst.getCreate_date()+"\t"+cst.getLastUpdatetime());
-//		String insertSql = "update customer set store_id=?,first_name=?,last_name=?,"
-//				+ "email=?,address_id=？,active=?,create_date=?,last_update=? where customer_id="+cst.getCustomer_id();
+
+//		System.out.println(cst.getStore_id()+"\t"+cst.getFirst_name()+"\t"+cst.getLast_name()+"\t"+cst.getEmail()+"\t"+cst.getAddress_id());
+//		System.out.println(cst.getActive()+"\t"+cst.getCreate_date()+"\t"+cst.getLastUpdatetime()+"\t"+cst.getCustomer_id());
+	
 	    String sql="UPDATE customer SET store_id=?,first_name=?,last_name=?,email=?,address_id=?,active=?,create_date=?,last_update=? WHERE customer_id = ?";
 		PreparedStatement ps = conn.prepareStatement(sql);	
 		
@@ -74,6 +66,7 @@ public class CustomerDaoImp implements CustomerDao {
 		System.out.println("更新成功");
 		return true;
 		}else{
+			
 			return false;
 		} 
 		
@@ -95,22 +88,7 @@ public class CustomerDaoImp implements CustomerDao {
 		preparedStatement.setInt(1, cs.getCustomer_id());
 		preparedStatement.execute();
 		preparedStatement.close();
-//		
-//			String Sql = "delete from customer where customer_id=?";
-//			PreparedStatement ps = conn.prepareStatement(Sql);	
-//		try{	
-//			ps.setLong(1,cs.getCustomer_id());			
-//			ps.execute();
-//		}catch(SQLException e){
-//		  e.printStackTrace();
-//		}		
-//		finally
-//	    {
-//	      if( ps != null) 
-//	        ps.close(); 		
-//	      if(conn!= null) 
-//	        conn.close(); 
-//	    }
+
 		
 		
 	}

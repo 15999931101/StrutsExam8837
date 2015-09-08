@@ -5,7 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionSupport;
 public class LoginAction {
 	private String username;
@@ -44,8 +47,9 @@ public class LoginAction {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				username = rs.getString(1);
-				
-				ServletActionContext.getRequest().getSession().setAttribute("username", username);
+				HttpServletRequest request = ServletActionContext.getRequest();
+				request.getSession().setAttribute("user", username);
+				request.removeAttribute("msg");
 				ret = "success";
 			}
 		} catch (Exception e) {

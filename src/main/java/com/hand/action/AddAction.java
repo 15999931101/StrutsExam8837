@@ -8,11 +8,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 import com.hand.dao.CustomerDao;
 import com.hand.dao.impl.CustomerDaoImp;
-import com.hand.dao.impl.GetConnetion;
 import com.hand.entity.Customer;
+import com.hand.util.ConnectionFactory;
 
 import freemarker.core.ReturnInstruction.Return;
 
@@ -95,8 +94,8 @@ public class AddAction {
 		System.out.println(first_name);
 		Connection conn = null;
 
-		conn = GetConnetion.getConnection();
-		//        Connection conn=ConnectionFactory.getInstance().makeConnection();
+		
+        conn=ConnectionFactory.getInstance().makeConnection();
 		String sql = "select address_id from address where address=address";
 		ResultSet rs = null;
 		int address_id = 0;

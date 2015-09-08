@@ -1,0 +1,199 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background-color: #f8f8f8;
+}
+/* ------导航栏样式设置------ */
+.body_div{
+    width: 1600px;
+    height: 775px;
+    padding: 2px;
+
+}
+.body_title nav{
+    width: 1596px;
+    height: 60px;
+    background-color: #66afe9;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.body_title h3{
+    width: 180px;
+    height: 50px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    float: left;
+}
+.collapse span{
+    text-align: center;
+    float: right;
+}
+.user_style{
+    text-align: center;
+    font-weight: bold;
+}
+.user_a_style{
+    text-decoration: none;
+    font-size: large;
+    padding: 5px;
+    padding-top: 30px;
+    text-align: center;
+    float: right;
+}
+.user_a_style span{
+    margin-top: 10px;
+    text-align: center;
+}
+.dropdown-menu{
+    margin-top: 64px;
+    text-align: center;
+}
+.dropdown-toggle a:link{
+    font-weight: bold;
+}
+.dropdown-toggle a:hover{
+    color: white;
+}
+
+.img_style img{
+    background:rgba(255,255,255,0.5);
+    width: 60px;
+    height: 60px;
+}
+
+/* ------左边菜单栏设置------ */
+.body_content{
+    width: 1596px;
+    border: 2px solid silver;
+    height: 710px;
+    padding: 2px;
+    position: absolute;
+    left: 2px;
+}
+
+.content_menu{
+    text-align: center;
+    width: 186px;
+    height: 702px;
+    position: absolute;
+    left: 4px;
+    border-right: 2px solid silver;
+    background-color: azure;
+}
+
+.body_content li{
+    width: 180px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.body_content li .btn{
+    border: none;
+    border-bottom: 1px solid silver;
+}
+
+.flag_style{
+    float: right;
+}
+
+/* ------右边内容栏设置------ */
+
+.content_main{
+    position: absolute;
+    left: 195px;
+    height: 676px;
+    width: 1380px;
+    border-top: none;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+.main_title{
+    color: black;
+    font-weight: bold;
+    font-size: x-large;
+    display: inline-block;
+}
+.main_top{
+    width: 1388px;
+    height: 56px;
+    margin-bottom: -3px;
+}
+
+.main_top hr{
+    margin-top: 5px;
+    border:2px solid #31b0d5;
+}
+
+.main_data{
+    padding: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+    width: 1388px;
+    height: 430px;
+    border: 2px solid silver;
+    background-color: azure;
+    margin-bottom: 2px;
+    font-size: 12px;
+    margin-bottom: 30px;
+}
+caption{
+    font-size: large;
+    width: 1376px;
+}
+caption .btn{
+
+    margin-left: 60px;
+    width: 80px;
+    height: 30px;
+    padding-bottom: 10px;
+    margin-top: -2px;
+    padding-top: 3px;
+}
+
+thead{
+    font-size: 13px;
+}
+table{
+    background-color: white;
+}
+.main_page{
+    width: 1388px;
+    height: 30px;
+    padding: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-bottom: 2px;
+    text-align: center;
+}
+.main_page nav{
+    float: right;
+    position: absolute;
+    right: 604px;
+    bottom: 178px;
+}
+.main_downboard{
+    position: absolute;
+    width: 1388px;
+    height: 185px;
+    overflow: auto;
+    padding: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+    border: 2px solid silver;
+    margin-bottom: 2px;
+    font-size: 12px;
+    background-color: azure;
+}
+
+.input_style{
+    margin-bottom: 10px;
+    width: 460px;
+}
+.modal-dialog{
+    width: 520px;
+}

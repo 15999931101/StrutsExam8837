@@ -1,0 +1,10 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    
+    background-image: url('../image/bg_body.jpg'); 
+    background-repeat: no-repeat;
+   
+}
